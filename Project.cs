@@ -25,31 +25,43 @@ class Highlow
 
 class Program
 {
+  public static string answer;
+
+  public static void makeGuesses()
+  {
+    Console.WriteLine("Is your number higher or lower than " + Highlow.number + "? (Higher/Lower/Correct)");
+    answer = Console.ReadLine();
+
+    if (answer == "correct" || answer == "Correct")
+    {
+      Console.WriteLine("Great! Thanks for playing!");
+    }
+    else if (answer == "Higher" || answer == "higher")
+    {
+      Highlow.higherGuess(Highlow.number);
+      makeGuesses();
+    }
+    else if (answer == "Lower" || answer == "lower")
+    {
+      Highlow.lowerGuess(Highlow.number);
+      makeGuesses();
+    }
+    else
+    {
+      Console.WriteLine("Please enter a valid response. (Higher/Lower/Correct)");
+    }
+  }
+
   static void Main()
   {
     Console.WriteLine("Would you like to play? Y or N");
-    string answer = Console.ReadLine();
+    answer = Console.ReadLine();
 
     if (answer == "y" || answer == "Y")
     {
       Console.WriteLine("Choose a number between 1 and 100!");
       Highlow.initialGuess();
-      Console.WriteLine("Is your number higher or lower than " + Highlow.number + "? (Higher/Lower/Correct)");
-      answer = Console.ReadLine();
-
-      if (answer == "correct" || answer == "Correct")
-      {
-        Console.WriteLine("Great! Thanks for playing!");
-      }
-      else if (answer == "Higher" || answer == "higher")
-      {
-        Highlow.higherGuess(Highlow.number);
-      }
-      else if (answer == "Lower" || answer == "lower")
-      {
-        Highlow.lowerGuess(Highlow.number);
-      }
+      makeGuesses();
     }
-
   }
 }

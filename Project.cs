@@ -63,15 +63,46 @@ class Program
     }
   }
 
+  public static void userGuesses()
+  {
+    int intAnswer = int.Parse(Console.ReadLine());
+    if (intAnswer == Highlow.number)
+    {
+      Console.WriteLine("That is correct! Thanks for playing the game.");
+    }
+    else if (intAnswer < Highlow.number)
+    {
+      Console.WriteLine("You need to go higher.");
+      userGuesses();
+    }
+    else if (intAnswer > Highlow.number)
+    {
+      Console.WriteLine("You need to go lower.");
+      userGuesses();
+    }
+  }
+
   static void Main()
   {
-    Console.WriteLine("Would you like to play? Hit Y when you have chosen a number between 1 and 100");
+    Console.WriteLine("Let's play a number guessing game. Would you like to pick a number (Option 1), or should I pick a number for you to guess (Option 2)?");
     answer = Console.ReadLine();
 
-    if (answer == "y" || answer == "Y")
+    if (answer == "1" || answer == "option 1" || answer == "Option 1")
+    {
+      Console.WriteLine("Okay. Pick a number between 1 and 100. Hit 'Y' when you are ready.");
+      answer = Console.ReadLine();
+      if (answer == "y" || answer == "Y")
+      {
+        Highlow.initialGuess();
+        makeGuesses();
+      }
+    }
+
+    if (answer == "2" || answer == "option 2" || answer == "Option 2")
     {
       Highlow.initialGuess();
-      makeGuesses();
+      Console.WriteLine("Okay. I have chosen a number between 1 and 100. Tell me your guess.");
+      userGuesses();
     }
   }
 }
